@@ -36,7 +36,11 @@ def calc_return(change, List):								# Tiền thừa / trả lại: Change
 def return_cash(change, money, List):
 	if(change >= money):
 		count = change / money
-		List.append("{0} note {1}$".format(str(int(count)), str(money)))
+		if count >= 2:
+			bill = "bills"
+		else:
+			bill = "bill"
+		List.append("{0} ${1} {2}".format(str(int(count)), str(money), bill))
 	else:
 		return change									# Nếu sai thoát hàm return_cash luôn và return giá trị change ban đầu
 	remaining_money = change % money 					# Số tiền còn lại: Remaining_money
@@ -44,7 +48,11 @@ def return_cash(change, money, List):
 	if(remaining_money != 0):
 		if(remaining_money > 0 and remaining_money < 1):
 			remaining_money	= remaining_money * 100
-			List.append('and ' + str(int(round(remaining_money,2))) + " cent")
+			if remaining_money >= 2:
+				cent = "cents"
+			else:
+				cent = "cent"
+			List.append('and ' + str(int(round(remaining_money,2))) + " " + cent)
 		else:
 			return remaining_money
 
